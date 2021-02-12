@@ -19,6 +19,9 @@ public class TodosPage extends BasePage {
 
 	/* Locators */
 	final static String INPUT_TEXT = "//input[@ng-model='newTodo']";
+	final static String ELEMENT_TODO = "//label[@class='ng-binding']";
+	final static String CHECKBOX = "//input[@type='checkbox']";
+
 
 	/* @FindBy */
 	// @FindBy(id = INPUT_TEXT)
@@ -27,10 +30,32 @@ public class TodosPage extends BasePage {
 	@FindBy(how = How.XPATH, using = INPUT_TEXT)
 	public static WebElement inputText;
 
+	@FindBy(how = How.XPATH, using = ELEMENT_TODO)
+	public static WebElement elementTodo;
+	
+	@FindBy(how = How.XPATH, using = CHECKBOX)
+	public static WebElement checkBox;
+
 	/* Methods */
 	public void submitTodo(String todo) {
 		writeText(inputText, todo);
 		inputText.sendKeys(Keys.ENTER);
 	}
 
+	
+	public Boolean isElementDisplayed(WebElement element) {
+		
+		Boolean isElementDisplayed = element.isDisplayed();
+		return isElementDisplayed;
+	}
+	
+	public String checkElementContains(WebElement element) {
+		String elementTodo = element.getText();
+		return elementTodo;
+	}
+	
+	public Boolean isCheckBoxSelected(WebElement element) {
+		Boolean isCheckBoxSelected = element.isSelected();
+	    return isCheckBoxSelected;	
+	}
 }
